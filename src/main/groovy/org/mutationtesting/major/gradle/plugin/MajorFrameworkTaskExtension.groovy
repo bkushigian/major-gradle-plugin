@@ -19,11 +19,11 @@
 package org.mutationtesting.major.gradle.plugin
 
 /**
- * A Gradle extension for Checker Framework configuration for compile tasks.
+ * A Gradle extension for Major Framework configuration for compile tasks.
  */
 class MajorFrameworkTaskExtension {
   /**
-   * If the Checker Framework should be skipped for this compile task.
+   * If the Major Framework should be skipped for this compile task.
    */
-  Boolean skipCheckerFramework = false
+  Boolean skipMajorFramework = false
 }

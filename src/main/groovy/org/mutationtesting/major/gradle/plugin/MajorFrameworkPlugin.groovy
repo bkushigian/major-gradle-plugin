@@ -33,14 +33,10 @@ import org.gradle.api.logging.Logging
 import org.gradle.api.tasks.compile.AbstractCompile
 
 final class MajorFrameworkPlugin implements Plugin<Project> {
-  // Checker Framework configurations and dependencies
+  // Major Framework configurations and dependencies
 
   // Whenever this line is changed, you need to change all occurrences in README.md.
   private final static def LIBRARY_VERSION = "2.0.0"
-
-  // private final static def ANNOTATED_JDK_NAME_JDK8 = "jdk8"
-  // private final static def ANNOTATED_JDK_CONFIGURATION = "majorFrameworkAnnotatedJDK"
-  // private final static def ANNOTATED_JDK_CONFIGURATION_DESCRIPTION = "A copy of JDK classes with Checker Framework type qualifiers inserted."
   private final static def CONFIGURATION = "majorFramework"
   private final static def CONFIGURATION_DESCRIPTION = "The Major Mutation Framework: mutation analysis for Java."
   private final static def JAVA_COMPILE_CONFIGURATION = "compileOnly"
@@ -49,14 +45,6 @@ final class MajorFrameworkPlugin implements Plugin<Project> {
   private final static def MAJOR_QUAL_DEPENDENCY = "org.mutationtesting:major:${LIBRARY_VERSION}"
 
   private final static Logger LOG = Logging.getLogger(MajorFrameworkPlugin)
-
-  // TODO: What should I modify this to?
-  private final static String majorFrameworkManifestCreationTaskName = 'createMajorFrameworkManifest'
-
-  /**
-   * Which subfolder of /build/ to put the Checker Framework manifest in.
-   */
-  private final static def manifestLocation = "/major/"
 
   /**
    * Configure each task in {@code project} with the given {@code taskType}.
@@ -108,7 +96,6 @@ final class MajorFrameworkPlugin implements Plugin<Project> {
 
     // Create a map of the correct configurations with dependencies
     def dependencyMap = [
-            // [name: "${ANNOTATED_JDK_CONFIGURATION}", descripion: "${ANNOTATED_JDK_CONFIGURATION_DESCRIPTION}"]: "org .checkerframework:${ANNOTATED_JDK_NAME_JDK8}:${LIBRARY_VERSION}",
             [name: "${CONFIGURATION}", description: "${CONFIGURATION_DESCRIPTION}"]                : "${MAJOR_DEPENDENCY}",
             [name: "${JAVA_COMPILE_CONFIGURATION}", description: "${CONFIGURATION_DESCRIPTION}"]   : "${MAJOR_QUAL_DEPENDENCY}",
             [name: "${TEST_COMPILE_CONFIGURATION}", description: "${CONFIGURATION_DESCRIPTION}"]   : "${MAJOR_QUAL_DEPENDENCY}",
@@ -180,7 +167,7 @@ final class MajorFrameworkPlugin implements Plugin<Project> {
   }
 
   /**
-   * Always call this method rather than using the skipCheckerFramework property directly.
+   * Always call this method rather than using the skipMajorFramework property directly.
    * Allows the user to set the property from the command line instead of in the build file,
    * if desired.
    */
@@ -194,7 +181,7 @@ final class MajorFrameworkPlugin implements Plugin<Project> {
     // Interesting stuff starts!
   private static applyToProject(Project project, MajorFrameworkExtension userConfig) {
 
-    // Apply checker to project
+    // Apply Major to project
     project.afterEvaluate {
       // Only time Martin knows of that I can modify compiler options
 
@@ -216,7 +203,7 @@ final class MajorFrameworkPlugin implements Plugin<Project> {
               project.configurations.majorFramework.plus(compile.options.annotationProcessorPath)
           // Check whether to use the Error Prone javac
 
-          // When running on Java 9+ code, the Checker Framework needs reflective access
+          // When running on Java 9+ code, the Major Framework needs reflective access
           // to some JDK classes. Pass the arguments that make that possible.
           // I'm Commenting the following out for now since I'm not checking jvmVersion anymore, but saving for later
           /*

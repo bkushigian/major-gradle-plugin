@@ -1,7 +1,6 @@
-# Gradle Checker Framework Plugin
+# Gradle Major Framework Plugin
 
 [![License](https://img.shields.io/badge/license-apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-[![Build Status](https://travis-ci.com/kelloggm/checkerframework-gradle-plugin.svg?branch=master)](https://travis-ci.com/kelloggm/checkerframework-gradle-plugin)
 
 This plugin configures `JavaCompile` tasks to use the [Major Mutation Framework](https://mutation-testing.org) for mutation analysis.
 
@@ -11,7 +10,7 @@ Add the following to your `build.gradle` file:
 
 ```groovy
 plugins {
-    // Checker Framework pluggable type-checking
+    // Major Framework pluggable type-checking
     id 'org.mutationtesting' version '0.0.1'
 }
 
