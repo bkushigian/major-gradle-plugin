@@ -1,0 +1,66 @@
+/**
+ * Copyright (C) 2017 Jared Burrows, 2018-2020 Martin Kellogg
+ *
+ * Modifications copyright (C) 2020 Benjamin Kushigian
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+plugins {
+    id 'com.github.ben-manes.versions' version '0.31.0'
+    id 'com.gradle.plugin-publish' version '0.12.0'
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+repositories {
+    jcenter()
+    google()
+
+    // The gradle plugin portal, so that we can depend on other plugins.
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
+apply from: 'gradle/dependencies.gradle'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    implementation localGroovy()
+}
+
+group 'org.mutationtesting'
+version '0.0.1'
+
+gradlePlugin {
+    plugins {
+        majorFrameworkPlugin {
+            id = 'org.mutationtesting'
+            displayName = 'Major Gradle Plugin'
+            description = 'Re-usable build logic for using the Major mutation system, for Gradle builds'
+            implementationClass = 'org.mutationtesting.major.gradle.plugin.MajorFrameworkPlugin'
+        }
+    }
+}
+
+pluginBundle {
+    website = 'https://mutation-testing.org'
+    vcsUrl = 'https://github.com/bkushigian/majorframework-gradle-plugin'
+    tags = ['major', 'mutation analysis', 'mutation testing']
+}
+
+apply from: 'gradle/compile.gradle'
