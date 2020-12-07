@@ -41,6 +41,7 @@ final class MajorFrameworkPlugin implements Plugin<Project> {
   private final static def CONFIGURATION_DESCRIPTION = "The Major Mutation Framework: mutation analysis for Java."
   private final static def JAVA_COMPILE_CONFIGURATION = "compileOnly"
   private final static def TEST_COMPILE_CONFIGURATION = "testCompileOnly"
+  private final static def TEST_RUNTIME_CONFIGURATION = "testRuntimeOnly"
   private final static def MAJOR_DEPENDENCY = "org.mutationtesting:major:${LIBRARY_VERSION}"
   private final static def MAJOR_QUAL_DEPENDENCY = "org.mutationtesting:major:${LIBRARY_VERSION}"
 
@@ -99,6 +100,7 @@ final class MajorFrameworkPlugin implements Plugin<Project> {
             [name: "${CONFIGURATION}", description: "${CONFIGURATION_DESCRIPTION}"]                : "${MAJOR_DEPENDENCY}",
             [name: "${JAVA_COMPILE_CONFIGURATION}", description: "${CONFIGURATION_DESCRIPTION}"]   : "${MAJOR_QUAL_DEPENDENCY}",
             [name: "${TEST_COMPILE_CONFIGURATION}", description: "${CONFIGURATION_DESCRIPTION}"]   : "${MAJOR_QUAL_DEPENDENCY}",
+            [name: "${TEST_RUNTIME_CONFIGURATION}", description: "${CONFIGURATION_DESCRIPTION}"]   : "${MAJOR_QUAL_DEPENDENCY}",
     ]
 
     // Add the configurations, if they don't exist, so that users can add to them.
